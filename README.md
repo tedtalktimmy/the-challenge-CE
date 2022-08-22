@@ -3,7 +3,7 @@
 ## Table of Contents
 * [Description](#description)
 * [Visuals](#visuals)
-* [How to use] (#use)
+* [How to use](#use)
 
 ## Description
 
