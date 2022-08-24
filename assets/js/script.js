@@ -14,7 +14,7 @@ var questionFocus = {};
 var timeLeft = 0;
 timerEl.textContent = 'Time: ' + timeLeft;
 
-var questionsList = [
+var questions = [
     {
         question: 'You can use CSS to alter the _______ of a web page.'
         answer1: 'structure',
@@ -46,7 +46,32 @@ var questionsList = [
     answer3: 'where/when',
     answer4: 'if/else',
 }
-]
+];
+// creates question and structures in the form of h1 as the question
+var questionHead = document.createElement('h1');
+questionHead.className = 'question-head';
+// structures answers in a list format
+var questionOl = document.createElement('ol');
+questionOl.className = 'questions-list';
+// creates buttons and assigns class name and id
+var questionBtn1 = document.createElement('button');
+questionBtn1.className = 'question-btn1';
+questionBtn1.id = 'question-btns';
+// creates buttons and assigns class name and id
+var questionBtn2 = document.createElement('button');
+questionBtn2.className = 'question-btn2'
+questionBtn2.id = 'question-btns';
+// creates buttons and assigns class name and id
+var questionBtn3 = document.createElement('button');
+questionBtn3.className = 'question-btn3';
+questionBtn3.id = 'question-btns';
+// creates buttons and assigns class name and id
+var questionBtn4 = document.createElement('button');
+questionBtn4.className = 'question-btn4';
+questionBtn4.id = 'question-btns';
+
+
+
 // AS A coding boot camp student
 // I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
 // SO THAT I can gauge my progress compared to my peers
