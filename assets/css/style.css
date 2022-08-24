@@ -1,4 +1,60 @@
-*, html {
+*,
+html {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    border: 1px solid black;
 }
+
+button {
+    background-color: white;
+    border-color: white;
+    color: rgb(66, 51, 75);
+}
+
+button:hover {
+    color: rgb(143, 106, 168);
+}
+
+
+/* the main div in which the rest of the divs are nested */
+.outer {
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+
+/* top header that shows highscore and time remaining */
+.top-head {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+/* p element in div "top" class */
+.top p {
+    float: right;
+}
+
+/* inner div */
+.page-content {
+    height: 100%;
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.intro {
+
+}
+
+.quiz {}
+
+
+.title {}
