@@ -6,7 +6,7 @@
 * [How to use](#use)
 
 ## Description
-
+[Link to live site:](https://tedtalktimmy.github.io/the-challenge-CE/)
 
 ## Visuals
 ![code-quiz-challenge-screenshot]()

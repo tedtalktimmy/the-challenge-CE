@@ -65,19 +65,8 @@ button:hover {
 
 .highscore-btn,
 #startBtn {
-    background-color: transparent;
+    background-color: rgb(122, 74, 169);
     border: 1px
     border-radius: 10px;
     padding: 5px;
-};
-
-#startBtn,
-.submit-btn,
-.back,
-.clear-score {
-    background-color: rgb(122, 74, 169);
-    color: white;
-    border-radius: 10px;
-    border: none;
-    margin: 5px 10px;
 };
