@@ -35,13 +35,13 @@ button:hover {
 }
 
 /* p element in div "top" class */
-.top p {
+#timer p {
     float: right;
 }
 
 /* inner div */
 .page-content {
-    height: 100%;
+    height: 75%;
     width: 50%;
     margin: 0 auto;
     display: flex;
@@ -50,9 +50,7 @@ button:hover {
 }
 
 
-.intro {
-
-}
+.intro {}
 
 .quiz {}
 

@@ -1,4 +1,13 @@
-
+// global variables (outside functions, top of page)
+var headerEl = document.querySelector('#top-head');
+var highscoreBtnEl = document.querySelector('#highscore-btn');
+var headerEl = document.querySelector('#top-head');
+var headerEl = document.querySelector('#top-head');
+var headerEl = document.querySelector('#top-head');
+var headerEl = document.querySelector('#top-head');
+var headerEl = document.querySelector('#top-head');
+var headerEl = document.querySelector('#top-head');
+var headerEl = document.querySelector('#top-head');
 // AS A coding boot camp student
 // I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
 // SO THAT I can gauge my progress compared to my peers
