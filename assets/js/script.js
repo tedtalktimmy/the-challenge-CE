@@ -1,10 +1,10 @@
 // global variables (outside functions, top of page)
-var headerEl = document.querySelector('#top-head');
+var headerEl = document.querySelector('.top-head');
 var highscoreBtnEl = document.querySelector('#highscore-btn');
-var headerEl = document.querySelector('#top-head');
-var headerEl = document.querySelector('#top-head');
-var headerEl = document.querySelector('#top-head');
-var headerEl = document.querySelector('#top-head');
+var timerEl = document.querySelector('#timer');
+var pageContentEl = document.querySelector('.page-content');
+var mainHead = document.querySelector('#main-head');
+var mainP = document.querySelector('#main-p');
 var headerEl = document.querySelector('#top-head');
 var headerEl = document.querySelector('#top-head');
 var headerEl = document.querySelector('#top-head');
