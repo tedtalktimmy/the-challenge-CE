@@ -16,16 +16,24 @@ button:hover {
 
 /* the main div in which the rest of the divs are nested */
 .outer {
-    padding: 10px;
-    height: 100vh;
-    display: flex;
+    padding: 50px;
+    height: 50vh;
+    display: row;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
+}
+.inner {
+    padding: 50px;
+    height: 100vh;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
 }
 
 
 /* top header that shows highscore and time remaining */
-.top-head {
+header.top-head {
     display: flex;
     justify-content: space-between;
     margin: 10px;

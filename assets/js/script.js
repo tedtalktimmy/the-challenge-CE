@@ -1,4 +1,9 @@
 // global variables (outside functions, top of page)
+//define global variable (outside, at top of page)
+// var headerEl = 
+// var btnStartEl = 
+// var mainHead = 
+// var pageContentEl = 
 var headerEl = document.querySelector('.top-head');
 var startBtnEl = document.querySelector('#startBtn');
 var mainHead = document.querySelector('#main-head');
@@ -172,12 +177,12 @@ var anotherQuestion = function (event) {
     var pressedBtn = event.target;
     if (pressedBtn.className == questions[questionSoFar].solution && questionSoFar < questions.length - 1) {
         questionSoFar++;
-        generateQuestion();
+        anotherQuestion();
         pageContentEl.appendChild(rightAnswer);
     } else if (pressedBtn.className != questions[questionSoFar].solution && questionSoFar < questions.length - 1) {
         timeLeft -= 10;
         questionSoFar++;
-        generateQuestion();
+        anotherQuestion();
         pageContentEl.appendChild(wrongAnswer);
     } else if (pressedBtn.className === questions[questionSoFar].solution) {
         stopGame();
@@ -258,5 +263,3 @@ var clearScore = function () {
 
 startBtnEl.addEventListener('click', startGame);
 highscoreBtnEl.addEventListener('click', highScore);
-
-debugger;
