@@ -15,6 +15,8 @@ var timeLeft = 0;
 timerEl.textContent = 'Time: ' + timeLeft;
 
 
+
+
 var questions = [
     {
         question: 'You can use CSS to alter the _______ of a web page.'
@@ -105,7 +107,7 @@ var startGame = function () {
     startBtnEl.remove();
 
     timeInt = setInterval(function () {
-        timerEl.textContent = (timeLeft >= 0) ? 'Time: ' + timeLeft : (timeLeft = 0) ? 'Time' + timeLeft;
+        timerEl.textContent = (timeLeft > 0) ? 'Time: ' + timeLeft : '';
 
         // if(timeLeft > 0) {
         //     timerEl.textContent = 'Time: ' + timeLeft;
@@ -119,7 +121,16 @@ var startGame = function () {
         stopGame();
     }, 1000);
     generateQuestion();
-}
+};
+
+// msgs for if user gets answers right or wrong
+var rightAnswer = document.createElement('div');
+rightAnswer.className = 'user-answer';
+rightAnswer.textContent = 'CORRECT';
+
+var wrongAnswer = document.createElement('div');
+wrongAnswer.className = 'user-answer';
+wrongAnswer.textContent = 'INCORRECT';
 
 
 var generateQuestion = function () {
@@ -150,10 +161,13 @@ var generateQuestion = function () {
     questionBtn3El.addEventListener('click', nextQuestion);
     var questionBtn4El = document.querySelector('.question-btn4');
     questionBtn4El.addEventListener('click', nextQuestion);
-}
+};
 
 var nextQuestion = function(event) {
-    var pressBtn = event.target
+    rightAnswer.remove();
+    wrongAnswer.remove();
+
+    var pressBtn = event.target;
     if (pressBtn.className === questions[questionSoFar].solution && questionSoFar < questions.length - 1) {
         questionSoFar++;
         generateQuestion();
@@ -177,23 +191,29 @@ var nextQuestion = function(event) {
 
 function stopGame() {
     clearInterval(timeInt);
-    timerEl.textContent = (timeLeft >= 0) ? 'Time: ' + timeLeft : '';
+    timerEl.textContent = (timeLeft >= 0) ? 'Time: ' + timeLeft : (timeLeft = 0) ? 'Time' + timeLeft;
+
+    // if (timeLeft >=0) {
+    //timerEl.textContent = 'Time: ' + timeLeft;
+    // } else {
+    // timeLeft = 0;
+    // timerEl.textContent = 'Time: ' + timeLeft;
+    // }
+    questionHead.textContent = 'Complete'
+    questionOl.textContent = 'final score: ' + timeLeft;
+    questionOl.appendChild(scoreForm);
+    document.addEventListener('submit', function(event) {
+        event.preventDefault();
+        localStorage.setItem(uScore.value, timeLeft);
+        
+        highscore();
+    })
+};
+
+var highScore = function() {
+    clearInterval(timeInt);
 }
-// THEN a timer starts and I am presented with a question
-        // once start button gets clicked, the timer starts and a question comes up
-
-// WHEN I answer a question
-        // Answer the question, click the button
-
-// THEN I am presented with another question
-        // upon clicking the button next, next question comes up
-
-// WHEN I answer a question incorrectly
-        // if function for question answered incorectly.
-
-// THEN time is subtracted from the clock
-        // if question is answered incorrectly, time is subtracted from clock
-
+headerEl.remove();
 // WHEN all questions are answered or the timer reaches 0
         // if function for all question answered or time runs out.
 
