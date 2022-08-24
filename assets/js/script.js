@@ -1,61 +1,71 @@
 // global variables (outside functions, top of page)
 var headerEl = document.querySelector('.top-head');
-var highscoreBtnEl = document.querySelector('#highscore-btn');
-var timerEl = document.querySelector('#timer');
-var pageContentEl = document.querySelector('.page-content');
+var startBtnEl = document.querySelector('#startBtn');
 var mainHead = document.querySelector('#main-head');
+var pageContentEl = document.querySelector('.page-content');
+var highscoreBtnEl = document.querySelector('.highscore-btn');
+var timerEl = document.querySelector('#timer');
 var mainP = document.querySelector('#main-p');
-var startBtn = document.querySelector('#start-btn');
-
 // keeps track of the amount of questions
 var questionSoFar = 0;
-var questionFocus = {};
+var questionNum = {};
+
 // timer
 var timeLeft = 0;
 timerEl.textContent = 'Time: ' + timeLeft;
 
+// msgs for if user gets answers right or wrong
+var rightAnswer = document.createElement('div');
+rightAnswer.className = 'player-answer';
+rightAnswer.textContent = 'CORRECT';
+var wrongAnswer = document.createElement('div');
+wrongAnswer.className = 'player-answer';
+wrongAnswer.textContent = 'INCORRECT';
 
 
 
 var questions = [
     {
-        question: 'You can use CSS to alter the _______ of a web page.'
-        answer1: 'structure',
-        answer2: 'domain',
-        answer3: 'style',
-        answer4: 'boolean',
+        question: "You can use CSS to alter the _______ of a web page.",
+        answer1: "structure",
+        answer2: "domain",
+        answer3: "style",
+        answer4: "boolean",
+        solution: "question-btn3"
     },
-
     {
-        question: 'In javaScript, what symbol represents the “and” operator?'
+        question: 'In javaScript, what symbol represents the “and” operator?',
         answer1: '||',
         answer2: '&+',
         answer3: '##',
         answer4: '&&',
+        solution: 'question-btn4'
     },
 
     {
-        question: 'In javaScript, what symbol is used to compare if two values are equal in a boolean expression?'
+        question: 'In javaScript, what symbol is used to compare if two values are equal in a boolean expression?',
         answer1: '+=',
         answer2: '++',
         answer3: '!-',
         answer4: '==',
+        solution: 'question-btn4'
     },
 
     {
-        question: 'what type of statement allows you to run a block of code if one condition is true and another block of code if the condition is false?'
+        question: 'what type of statement allows you to run a block of code if one condition is true and another block of code if the condition is false?',
         answer1: 'who/what',
-        answer2: 'if/then',
+        answer2: 'if/else',
         answer3: 'where/when',
-        answer4: 'if/else',
+        answer4: 'if/then',
+        solution: 'question-btn2'
     }
 ];
 // creates question and structures in the form of h1 as the question
 var questionHead = document.createElement('h1');
 questionHead.className = 'question-head';
 // structures answers in a list format
-var questionOl = document.createElement('ol');
-questionOl.className = 'questions-list';
+var questionDiv = document.createElement('ol');
+questionDiv.className = 'questions';
 // creates buttons and assigns class name and id
 var questionBtn1 = document.createElement('button');
 questionBtn1.className = 'question-btn1';
@@ -76,10 +86,11 @@ questionBtn4.id = 'question-btns';
 
 // form input and initials input for highscore
 var scoreForm = document.createElement('form');
-uScore.type = 'text';
-uScore.className = 'user-score';
-uScore.placeholder = 'enter your initials';
-scoreForm.appendChild(userScore);
+playerScore = document.createElement('input');
+playerScore.className = 'player-score';
+playerScore.type = 'text/plain';
+playerScore.placeholder = 'enter your initials';
+scoreForm.appendChild(playerScore);
 // submit button for highscore
 var scoreBtn = document.createElement('button');
 scoreBtn.type = 'submit';
@@ -87,9 +98,9 @@ scoreBtn.className = 'submit-btn';
 scoreBtn.textContent = 'submit highscore';
 scoreForm.appendChild(scoreBtn);
 //restart button
-var restartBtn = document.createElement('button');
-restartBtn.className = 'restart-btn';
-restartBtn.textContent = 'restart';
+var btnBack = document.createElement('button');
+btnBack.className = 'back';
+btnBack.textContent = 'back';
 // button to clear highscores
 var clearScoreBtn = document.createElement('button');
 clearScoreBtn.className = 'clear-score';
@@ -107,77 +118,68 @@ var startGame = function () {
     startBtnEl.remove();
 
     timeInt = setInterval(function () {
-        timerEl.textContent = (timeLeft > 0) ? 'Time: ' + timeLeft : '';
+        if (timeLeft >= 0) {
+            timerEl.textContent = 'Time: ' + timeLeft;
+            timeLeft--;
+        } else {
+            timerEl.textContent = '';
 
-        // if(timeLeft > 0) {
-        //     timerEl.textContent = 'Time: ' + timeLeft;
-        //     timeLeft--;
-        // } else {
-        //     timerEl.textContent = '';
-
-        // clears timer
-        clearInterval(timeInt);
-        // stops game if timer runs out
-        stopGame();
+            // clears timer
+            clearInterval(timeInt);
+            // stops game if timer runs out
+            stopGame();
+        }
     }, 1000);
-    generateQuestion();
-};
 
-// msgs for if user gets answers right or wrong
-var rightAnswer = document.createElement('div');
-rightAnswer.className = 'user-answer';
-rightAnswer.textContent = 'CORRECT';
+    makeQuestion();
+}
 
-var wrongAnswer = document.createElement('div');
-wrongAnswer.className = 'user-answer';
-wrongAnswer.textContent = 'INCORRECT';
-
-
-var generateQuestion = function () {
+var makeQuestion = function () {
     questionHead.textContent = questions[questionSoFar].question;
     pageContentEl.appendChild(questionHead);
-    
-    questionOl.textContent = '';
-    pageContentEl.appendChild(questionOl);
+
+    questionDiv.textContent = '';
+    pageContentEl.appendChild(questionDiv);
+
 
     questionBtn1.textContent = questions[questionSoFar].answer1;
-    questionOl.appendChild(questionBtn1);
+    questionDiv.appendChild(questionBtn1);
 
     questionBtn2.textContent = questions[questionSoFar].answer2;
-    questionOl.appendChild(questionBtn2);
+    questionDiv.appendChild(questionBtn2);
 
     questionBtn3.textContent = questions[questionSoFar].answer3;
-    questionOl.appendChild(questionBtn3);
+    questionDiv.appendChild(questionBtn3);
 
     questionBtn4.textContent = questions[questionSoFar].answer4;
-    questionOl.appendChild(questionBtn4);
+    questionDiv.appendChild(questionBtn4);
 
     // add.event.listener
     var questionBtn1El = document.querySelector('.question-btn1');
-    questionBtn1El.addEventListener('click', nextQuestion);
+    questionBtn1El.addEventListener('click', anotherQuestion);
     var questionBtn2El = document.querySelector('.question-btn2');
-    questionBtn2El.addEventListener('click', nextQuestion);
+    questionBtn2El.addEventListener('click', anotherQuestion);
     var questionBtn3El = document.querySelector('.question-btn3');
-    questionBtn3El.addEventListener('click', nextQuestion);
+    questionBtn3El.addEventListener('click', anotherQuestion);
     var questionBtn4El = document.querySelector('.question-btn4');
-    questionBtn4El.addEventListener('click', nextQuestion);
+    questionBtn4El.addEventListener('click', anotherQuestion);
 };
 
-var nextQuestion = function(event) {
+var anotherQuestion = function (event) {
     rightAnswer.remove();
     wrongAnswer.remove();
 
-    var pressBtn = event.target;
-    if (pressBtn.className === questions[questionSoFar].solution && questionSoFar < questions.length - 1) {
+    var pressedBtn = event.target;
+    if (pressedBtn.className == questions[questionSoFar].solution && questionSoFar < questions.length - 1) {
         questionSoFar++;
         generateQuestion();
         pageContentEl.appendChild(rightAnswer);
-    } else if (pressBtn.className !== questions[questionSoFar].solution && questionSoFar < questions.length - 1) {
-        timeLeft -=10;
+    } else if (pressedBtn.className != questions[questionSoFar].solution && questionSoFar < questions.length - 1) {
+        timeLeft -= 10;
         questionSoFar++;
         generateQuestion();
         pageContentEl.appendChild(wrongAnswer);
-    } else if (pressBtn.className === questions[questionSoFar].solution) {
+    } else if (pressedBtn.className === questions[questionSoFar].solution) {
         stopGame();
         pageContentEl.appendChild(rightAnswer);
         return;
@@ -187,41 +189,74 @@ var nextQuestion = function(event) {
         pageContentEl.appendChild(wrongAnswer);
         return;
     }
-};
+}
 
 function stopGame() {
     clearInterval(timeInt);
-    timerEl.textContent = (timeLeft >= 0) ? 'Time: ' + timeLeft : (timeLeft = 0) ? 'Time' + timeLeft;
 
-    // if (timeLeft >=0) {
-    //timerEl.textContent = 'Time: ' + timeLeft;
-    // } else {
-    // timeLeft = 0;
-    // timerEl.textContent = 'Time: ' + timeLeft;
-    // }
+    if (timeLeft >= 0) {
+        timerEl.textContent = 'Time: ' + timeLeft;
+    } else {
+        timeLeft = 0;
+        timerEl.textContent = 'Time: ' + timeLeft;
+    }
     questionHead.textContent = 'Complete'
-    questionOl.textContent = 'final score: ' + timeLeft;
-    questionOl.appendChild(scoreForm);
-    document.addEventListener('submit', function(event) {
+    questionDiv.textContent = 'final score: ' + timeLeft;
+    questionDiv.appendChild(scoreForm);
+    document.addEventListener('submit', function (event) {
         event.preventDefault();
-        localStorage.setItem(uScore.value, timeLeft);
-        
-        highscore();
-    })
+        localStorage.setItem(userScore.value, timeLeft);
+
+        highScore();
+    });
+}
+
+var highScore = function () {
+    try {
+        clearInterval(timeInt);
+    } catch { }
+    headerEl.remove();
+    mainHead.remove();
+    mainP.remove();
+    startBtnEl.remove();
+    rightAnswer.remove()
+    wrongAnswer.remove();
+
+    pageContentEl.appendChild(questionHead);
+    pageContentEl.appendChild(questionDiv);
+
+    questionHead.textContent = 'high scores'
+    questionDiv.textContent = ''
+    var highScoreList = [];
+    for (var i = 0; i < localStorage.length; i++) {
+        highScoreList.push(localStorage.getItem(localStorage.key(i)) + ' - ' + localStorage.key(i));
+        highScoreList.sort().reverse();
+    }
+    for (var i = 0; i < highScoreList.length; i++) {
+        var highScoreListItem = document.createElement('li');
+        highScoreListItems.className = 'score-list';
+        highScoreListItem.textContent = highScoreList[i];
+        questionDiv.append(highScoreListItem);
+    };
+
+    pageContentEl.appendChild(btnBack);
+    pageContentEl.appendChild(clearScoreBtn);
+
+    btnBack.addEventListener('click', btnBack);
+    clearScoreBtn.addEventListener('click', clearScore);
 };
 
-var highScore = function() {
-    clearInterval(timeInt);
+var btnBack = function () {
+    window.location.reload();
+};
+
+var clearScore = function () {
+    localStorage.clear();
+    alert('high scores have been reset');
+    window.location.reload();
 }
-headerEl.remove();
-// WHEN all questions are answered or the timer reaches 0
-        // if function for all question answered or time runs out.
 
-// THEN the game is over
-        // if either of the above happens, the game ends
+startBtnEl.addEventListener('click', startGame);
+highscoreBtnEl.addEventListener('click', highScore);
 
-// WHEN the game is over
-        // game ends
-
-// THEN I can save my initials and my score
-        // ability to save initials and score
+debugger;

@@ -1,15 +1,12 @@
-*,
-html {
+* {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    border: 1px solid black;
 }
 
 button {
-    background-color: white;
-    border-color: white;
-    color: rgb(66, 51, 75);
+    background-color: transparent;
+    border-color: transparent;
+    color: rgb(79, 52, 95);
 }
 
 button:hover {
@@ -37,22 +34,24 @@ button:hover {
 /* p element in div "top" class */
 #timer p {
     float: right;
-}
+};
 
 /* inner div */
 .page-content {
-    height: 75%;
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+    text-align: center;
+};
 
 
-.intro {}
+.questions {
+    width: 40%;
+    margin 10px auto;
+    list-style-type: decimal;
+    list-style-position: inside;
+};
 
-.quiz {}
+#question-btns {
+    
 
-
-.title {}
+};
